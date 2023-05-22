@@ -17,5 +17,5 @@ COPY ${JAR_FILE} storeapi_item.jar
 RUN ./gradlew build
 
 # Exponera port och ange startkommando
-EXPOSE 8082
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "storeapi_item.jar"]
