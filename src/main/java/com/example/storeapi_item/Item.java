@@ -19,9 +19,4 @@ public class Item {
     @Column(nullable = false)
     private Double price;
 
-    public Item(String name, Double price) {
-        this.name = name;
-        this.price = price;
-    }
-
 }
