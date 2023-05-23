@@ -1,0 +1,24 @@
+//Post Parameters Body (Correct parameters):
+POST http://localhost:8080/items/buy
+Content-Type: application/x-www-form-urlencoded
+
+customerId=3&itemId=10
+
+###
+//Post Parameters Body (INCORRECT parameters):
+POST http://localhost:8080/items/buy
+Content-Type: application/x-www-form-urlencoded
+
+customerId=4&itemId=8
+
+###
+//Post Text Body:
+POST http://localhost:8080/items/add
+Content-Type: application/json
+
+{
+  "name": "Äpple",
+  "price": "10.0"
+}
+
+###

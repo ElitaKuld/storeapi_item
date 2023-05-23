@@ -14,9 +14,9 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String name;
-
+    @Column(nullable = false)
     private Double price;
 
     public Item(String name, Double price) {
@@ -25,5 +25,3 @@ public class Item {
     }
 
 }
-
-//@Column(nullable = false)

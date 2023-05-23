@@ -19,7 +19,7 @@ public class ItemController {
         this.itemRepository = itemRepository;
     }
 
-    // http://localhost:8080/items/all (Denna returnerar alla varor)
+    // http://localhost:8082/items/all (Denna returnerar alla varor)
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Item> getAllItems() {
         log.info("GET-ting all items");
@@ -27,19 +27,17 @@ public class ItemController {
         return itemRepository.findAll();
     }
 
-    // http://localhost:8080/items/get/{id} (Denna returnerar en vara baserat på varans id)
+    // http://localhost:8082/items/get/{id} (Denna returnerar en vara baserat på varans id)
     @GetMapping(path="get/{id}")
     public @ResponseBody Item getItemById(@PathVariable long id) {
         log.info("GET-ting the item with the id " + id);
         return itemRepository.findById(id).get();
     }
 
-    // http://localhost:8080/items/add (Denna endpoint skapar ny vara)
-    @RequestMapping(path="/add") // Map ONLY POST Requests
+    // http://localhost:8082/items/add (Denna endpoint skapar ny vara)
+    @RequestMapping(path="/add/param") // Map ONLY POST Requests
     public @ResponseBody String addNewItem (@RequestParam String name
             , @RequestParam Double price) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
 
         Item item = new Item();
         item.setName(name);
@@ -55,11 +53,9 @@ public class ItemController {
         return "Item " + item.getName() + " for the price of " + item.getPrice() + " has been added to the database.";
     }
 
-    // http://localhost:8080/items/add/body (Denna endpoint skapar ny vara)
-    @PostMapping(path = "/add/body") // Map ONLY POST Requests
+    // http://localhost:8082/items/add/body (Denna endpoint skapar ny vara)
+    @PostMapping(path = "/add/body")
     public @ResponseBody String addNewItemViaBody(@RequestBody AddItemForm input) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
 
         Item item = new Item();
         item.setName(input.getName());
@@ -73,6 +69,18 @@ public class ItemController {
         itemRepository.save(item);
         log.info("Item " + item.getName() + " for the price of " + item.getPrice() + " has been added to the database.");
         return "Item " + item.getName() + " for the price of " + item.getPrice() + " has been added to the database.";
+    }
+
+    // http://localhost:8082/items/add (Denna endpoint skapar ny vara)
+    @PostMapping(path = "/add")
+    public @ResponseBody Item addNewItemReturnItem(@RequestBody AddItemForm input) {
+
+        Item item = new Item();
+        item.setName(input.getName());
+        item.setPrice(input.getPrice());
+
+        itemRepository.save(item);
+        return item;
     }
 
     public Boolean itemAlreadyExists(Item itemToCheck) {
