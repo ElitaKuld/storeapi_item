@@ -1,4 +1,4 @@
-package com.example.storeapi_item;
+package com.example.storeapi_item.Model;
 
 import jakarta.persistence.*;
 import lombok.*;

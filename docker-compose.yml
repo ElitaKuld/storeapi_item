@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  storeapi_item_db:
+    restart: unless-stopped
+    image: mysql:latest
+    environment:
+      MYSQL_HOST: storeapi_item_db
+      MYSQL_DATABASE: itemdb
+      MYSQL_USER: itemuser
+      MYSQL_PASSWORD: ${I_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${I_MYSQL_ROOT_PASSWORD}
+      MYSQL_CHARSET: utf8
+      MYSQL_COLLATION: utf8_general_ci
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3308:3306"
+    networks:
+      - storenetwork
+
+
+  storeapi_item_app:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/elitakuld/storeapi-db-item
+    ports:
+      - "8082:8080"
+    environment:
+      MYSQL_HOST: storeapi_item_db
+      DB_DATABASE: itemdb
+      DB_USER: itemuser
+      DB_PASSWORD: ${I_DB_PASSWORD}
+      MYSQL_CHARSET: utf8
+      MYSQL_COLLATION: utf8_general_ci
+    networks:
+      - storenetwork
+    depends_on:
+      - storeapi_item_db
+
+networks:
+  storenetwork:

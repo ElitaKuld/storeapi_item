@@ -1,5 +1,8 @@
-package com.example.storeapi_item;
+package com.example.storeapi_item.Controller;
 
+import com.example.storeapi_item.AddItemForm;
+import com.example.storeapi_item.Model.Item;
+import com.example.storeapi_item.Repo.ItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,7 @@ public class ItemController {
         return itemRepository.findById(id).get();
     }
 
-    // http://localhost:8082/items/add (Denna endpoint skapar ny vara)
+    // http://localhost:8082/items/add/paran (Denna endpoint skapar ny vara (tar in parametrar, returnerar String))
     @RequestMapping(path="/add/param") // Map ONLY POST Requests
     public @ResponseBody String addNewItem (@RequestParam String name
             , @RequestParam Double price) {
@@ -53,7 +56,7 @@ public class ItemController {
         return "Item " + item.getName() + " for the price of " + item.getPrice() + " has been added to the database.";
     }
 
-    // http://localhost:8082/items/add/body (Denna endpoint skapar ny vara)
+    // http://localhost:8082/items/add/body (Denna endpoint skapar ny vara (tar in body, returnerar String))
     @PostMapping(path = "/add/body")
     public @ResponseBody String addNewItemViaBody(@RequestBody AddItemForm input) {
 
@@ -71,7 +74,7 @@ public class ItemController {
         return "Item " + item.getName() + " for the price of " + item.getPrice() + " has been added to the database.";
     }
 
-    // http://localhost:8082/items/add (Denna endpoint skapar ny vara)
+    // http://localhost:8082/items/add (Denna endpoint skapar ny vara (tar in body, returnerar Item))
     @PostMapping(path = "/add")
     public @ResponseBody Item addNewItemReturnItem(@RequestBody AddItemForm input) {
 

@@ -1,2 +1,2 @@
-revoke all on `storeapidb\_item`.* from 'dear_item_user'@'%';
-grant select, insert, delete, update on storeapidb_item.* to 'dear_item_user'@'%';
+revoke all on `itemdb`.* from 'itemuser'@'%';
+grant select, insert, delete, update on itemdb.* to 'itemuser'@'%';
