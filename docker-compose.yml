@@ -1,10 +1,10 @@
 version: "3.9"
 services:
-  storeapi_item_db:
+  storeapi-item-db:
     restart: unless-stopped
     image: mysql:latest
     environment:
-      MYSQL_HOST: storeapi_item_db
+      MYSQL_HOST: storeapi-item-db
       MYSQL_DATABASE: itemdb
       MYSQL_USER: itemuser
       MYSQL_PASSWORD: ${I_MYSQL_PASSWORD}
@@ -18,17 +18,16 @@ services:
     networks:
       - storenetwork
 
-
-  storeapi_item_app:
+  storeapi-item-app:
     restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/elitakuld/storeapi-db-item
+    image: ghcr.io/elitakuld/storeapi-db-item:latest
     ports:
       - "8082:8080"
     environment:
-      MYSQL_HOST: storeapi_item_db
+      MYSQL_HOST: storeapi-item-db
       DB_DATABASE: itemdb
       DB_USER: itemuser
       DB_PASSWORD: ${I_DB_PASSWORD}
@@ -37,7 +36,7 @@ services:
     networks:
       - storenetwork
     depends_on:
-      - storeapi_item_db
+      - storeapi-item-db
 
 networks:
   storenetwork:

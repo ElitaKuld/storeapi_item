@@ -37,8 +37,8 @@ public class ItemController {
         return itemRepository.findById(id).get();
     }
 
-    // http://localhost:8082/items/add/paran (Denna endpoint skapar ny vara (tar in parametrar, returnerar String))
-    @RequestMapping(path="/add/param") // Map ONLY POST Requests
+    // http://localhost:8082/items/add/param (Denna endpoint skapar ny vara (tar in parametrar, returnerar String))
+    @RequestMapping(path="/add/param")
     public @ResponseBody String addNewItem (@RequestParam String name
             , @RequestParam Double price) {
 
