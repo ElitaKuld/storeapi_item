@@ -89,3 +89,5 @@ gradle-app.setting
 
 #Lösenorden:
 .env
+!**/src/main/**/*.env
+!**/src/main/**/.env

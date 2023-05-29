@@ -18,5 +18,4 @@ public class Item {
     private String name;
     @Column(nullable = false)
     private Double price;
-
 }

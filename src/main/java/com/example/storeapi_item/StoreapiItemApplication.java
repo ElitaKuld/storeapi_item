@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StoreapiItemApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StoreapiItemApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StoreapiItemApplication.class, args);
+    }
 
 }

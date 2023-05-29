@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(path="/items")
+@RequestMapping(path = "/items")
 public class ItemController {
     @Autowired
     private final ItemRepository itemRepository;
@@ -23,7 +23,7 @@ public class ItemController {
     }
 
     // http://localhost:8082/items/all (Denna returnerar alla varor)
-    @GetMapping(path="/all")
+    @GetMapping(path = "/all")
     public @ResponseBody Iterable<Item> getAllItems() {
         log.info("GET-ting all items");
         // This returns a JSON or XML with the items
@@ -31,15 +31,16 @@ public class ItemController {
     }
 
     // http://localhost:8082/items/get/{id} (Denna returnerar en vara baserat på varans id)
-    @GetMapping(path="get/{id}")
+    @GetMapping(path = "get/{id}")
     public @ResponseBody Item getItemById(@PathVariable long id) {
         log.info("GET-ting the item with the id " + id);
         return itemRepository.findById(id).get();
     }
 
-    // http://localhost:8082/items/add/param (Denna endpoint skapar ny vara (tar in parametrar, returnerar String))
-    @RequestMapping(path="/add/param")
-    public @ResponseBody String addNewItem (@RequestParam String name
+    // http://localhost:8082/items/add/param (Denna endpoint skapar ny vara (tar in parametrar,
+    // returnerar String))
+    @RequestMapping(path = "/add/param")
+    public @ResponseBody String addNewItem(@RequestParam String name
             , @RequestParam Double price) {
 
         Item item = new Item();
